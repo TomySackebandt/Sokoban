@@ -75,10 +75,10 @@ function col(x,y,sens,c)
         vy = 0
     end
     -- if cor for player and push a box
-    if mapGet(floor((x+vx)/16),(floor(y+vy)/16))==1 and c==0 or mapGet(floor((x+vx)/16),(floor(y+vy)/16))==17 and c==0 then
+    if mapGet(floor((x+vx)),(floor(y+vy)))==3 and c==0 or mapGet(floor((x+vx)),(floor(y+vy)))==4 and c==0 then
         if col(x+vx,y+vy,sens,1) then -- call colision of box
-            mapSet((x+vx)/16,(y+vy)/16,2)--erased last pos
-            mapSet((x+vx*2)/16,(y+vy*2)/16,1)--write futur pos
+            mapSet((x+vx),(y+vy),1)--erased last pos
+            mapSet((x+vx*2),(y+vy*2),3)--write futur pos
         end
     end
     
