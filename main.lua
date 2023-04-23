@@ -2,6 +2,8 @@
 
 require "Screen/Game"
 require "Screen/Menu"
+require "Screen/Over"
+
 font = love.graphics.newFont("BitPotionExt.ttf", 35)
 love.graphics.setFont(font)
 

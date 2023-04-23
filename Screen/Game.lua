@@ -49,9 +49,12 @@ function love.keypressed( key, scancode, isrepeat )--player move
     end
 
     --restart the level
-    if(key == "z") then
+    if(key == "x") then
         --add function
+        restart()
     end
+
+    vx,vy = 0,0
 end
 
 function solid(x,y)
@@ -95,19 +98,49 @@ end
 function updateGame()
     --data()
     p.mx,p.my = p.x-margex,p.y-margey
-
-    if not loaded then --if lvl not loaded
-        --remove some var
-        nbal= 0
-        for i=0,#goal do
-            table.remove(goal)
+    -- if the level is not finsih 
+	if not have_win then
+        if not loaded then --if lvl not loaded
+            --remove some var
+            nbal= 0
+            for i=0,#goal do
+                table.remove(goal)
+            end
+            --load data of the level
+            data()
+            loaded = true
+            --if spawn ~= {} then p.x,p.y = spawn.x,spawn.y end
         end
-        --load data of the level
-        data()
-        loaded = true
-        --if spawn ~= {} then p.x,p.y = spawn.x,spawn.y end
-    end
+        --detection if box is in a goals
+		for i,v in ipairs(goal) do
+			detect(v.X,v.Y)
+		end
 
+        --game loop test
+		if nbobj == 0 then
+			have_win = true
+		end
+    else -- if level finished
+		-- when game finish
+		if lvl_now >= lvl_max and moves~=0 then -- if finish game
+            updateState = updateOver
+            drawState = drawOver
+			--print info level & finsih message
+			gprint("level "..lvl_now.."\n\nFinished in : \n"..moves.." moves",80,50,12)
+			gprint("Congratulation\nYou have finished the game !!!",60,80,12)
+		else
+			t=t+1
+			--print info level
+			gprint("level "..lvl_now.."\n\nFinished in : \n"..moves.." moves !",90,50,12)
+			if t<2*60 then return end -- wait 2s
+			moves = 0
+			lvl_now = lvl_now+1 --change level
+			--reset timer & some var
+			t = 0
+			have_win = false
+			loaded = false
+		end
+    end
 end
 
 function debug()

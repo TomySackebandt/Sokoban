@@ -77,7 +77,7 @@ function data()
 				p.x,p.y = x+128,96+y
 			end
 			-- if tile = box valid or not
-			if mapGet(x,y) == 3 or mapGet(x,y) == 5 then
+			if mapGet(x,y) == 3 or mapGet(x,y) == 4 then
 				tmp = {X=x,Y=y}
 				table.insert(box,tmp)
 			end
@@ -85,4 +85,42 @@ function data()
 	end
 	nbobj = #goal - nbal
 	backup_nbobj = nbobj
+end
+
+
+--detect changment of a tile cord
+function detect(x,y)
+	if mapGet(x,y) == 3 then
+		nbobj = nbobj - 1
+		mapSet(x,y,4)
+	elseif mapGet(x,y) ~=5 and mapGet(x,y)~=3 and mapGet(x,y)~=4 then
+		mapSet(x,y,5)
+		nbobj = nbobj + 1
+	end
+end
+
+function restart()
+	--reset var
+	nbobj=backup_nbobj+nbal
+	moves = 0
+	p.x,p.y = spawn.x,spawn.y
+	
+	minx,miny = 128,96
+	maxx,maxy = 30*16,17*16
+	--reset object on map
+	for x=minx,maxx do
+		for y=miny,maxy do
+			if mapGet(x,y)==3 then
+				mapSet(x,y,1)
+			end
+			if mapGet(x,y)==4 then
+				mapSet(x,y,5)
+			end
+		end
+	end
+	
+	-- reset box
+	for i=1,#box do
+		mapSet(box[i].X,box[i].Y,3)
+	end
 end
