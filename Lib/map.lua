@@ -4,6 +4,10 @@ Tileset = love.graphics.newImage('Tileset.png')
 
 Quads = {}
 
+nbobj = 0 -- to win have to be 0
+goal = {} -- cord where box have to be
+nbal = 0 -- nb box already good
+
 --cut image in quads
 for i=0,56,8 do
     table.insert(Quads,love.graphics.newQuad(i,0,8,8,56,8))
@@ -59,25 +63,25 @@ end
 function data()
 	minx,miny = 128,96
 	maxx,maxy = 30*16,17*16
-	for x=minx,maxx do
-		for y=miny,maxy do
+	for x=minx,maxx,16 do
+		for y=miny,maxy,16 do
 			-- tile = box valid or goal
-			if mapGet(x,y) ==4 or mapGet(x,y) == 5 then
+			if (mapGet(x,y) == 4 or mapGet(x,y) == 5) then
 				tmp = {X=x,Y=y}
 				table.insert(goal,tmp)
 				--if box is valid
-				if mapGet(x,y) == 5 then nbal = nbal + 1 end		
+				if mapGet(x,y) == 4 then nbal = nbal + 1 end		
 			end
 			--if tile is player spawn
 			--the x and y is pixel do i have to make sure it's 16*
-			if mapGet(x,y) == 6 and (x % 16 == 0) and  (y % 16 == 0)then
+			if mapGet(x,y) == 6 then
 				mapSet(x,y,1)
 				spawn.x,spawn.y = x+128,96+y
                 print(x.." : "..y)
 				p.x,p.y = x+128,96+y
 			end
 			-- if tile = box valid or not
-			if mapGet(x,y) == 3 or mapGet(x,y) == 4 then
+			if (mapGet(x,y) == 3 or mapGet(x,y) == 4) then
 				tmp = {X=x,Y=y}
 				table.insert(box,tmp)
 			end

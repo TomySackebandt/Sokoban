@@ -12,9 +12,7 @@ p={ --player
     my=0
 }
 
-nbobj = 0 -- to win have to be 0
-goal = {} -- cord where box have to be
-nbal = 0 -- nb box already good
+
 
 
 lvl_now = 1 --current level
@@ -54,7 +52,7 @@ function love.keypressed( key, scancode, isrepeat )--player move
         restart()
     end
 
-    vx,vy = 0,0
+
 end
 
 function solid(x,y)
@@ -95,6 +93,7 @@ function col(x,y,sens,c)
     end
 end
 
+local t = 0
 function updateGame()
     --data()
     p.mx,p.my = p.x-margex,p.y-margey
@@ -123,14 +122,15 @@ function updateGame()
     else -- if level finished
 		-- when game finish
 		if lvl_now >= lvl_max and moves~=0 then -- if finish game
-            updateState = updateOver
-            drawState = drawOver
+            
 			--print info level & finsih message
 			gprint("level "..lvl_now.."\n\nFinished in : \n"..moves.." moves",80,50,12)
 			gprint("Congratulation\nYou have finished the game !!!",60,80,12)
 		else
 			t=t+1
 			--print info level
+            updateState = updateOver
+            drawState = drawOver
 			gprint("level "..lvl_now.."\n\nFinished in : \n"..moves.." moves !",90,50,12)
 			if t<2*60 then return end -- wait 2s
 			moves = 0
@@ -157,7 +157,7 @@ function debug()
         end
         
     end
-    --gprint(spawn.x,222,15)
+    gprint(nbobj,222,15)
 
 end
 
