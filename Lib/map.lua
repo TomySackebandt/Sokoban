@@ -32,13 +32,21 @@ function mapSet(x,y,s)
     map.layers[1].data[x+((y-1)*30)] = s
 end
 
-function test(px)
-    return math.floor(px/map.layers[1].width)
-end
-
 function mapGet(x,y)
-    x = math.floor(x/map.layers[1].width)
+    x = math.floor(x/16)
     y = math.floor(y/map.layers[1].height)
     
-    return(map.layers[1].data[x+((y-1)*map.layers[1].width)])
+    return(map.layers[1].data[((y-1) * map.layers[1].width + x)+1])
+end
+
+
+function test(x,y)
+
+    --x = math.floor(x/map.layers[1].width*2)
+    x = math.floor(x/16)
+    y = math.floor(y/map.layers[1].height)
+    
+    --return(x+((y-1)*map.layers[1].width))
+    return ((y-1) * map.layers[1].width + x) +1
+
 end
