@@ -7,10 +7,10 @@ C'est aussi un portage de mon sokoban fait avec la [Fantasy console](https://fr.
 
 ## Todo
 
-- [ ] Chargement de map
+- [x] Chargement de map
 - [ ] Niveau en ligne
 - [ ] Score en ligne
 - [ ] Création du site en ligne
 - [ ] Utilisation d'api
 - [ ] Portage du jeu
-- [ ] Création des fonction primordial au jeu
+- [x] Création des fonction primordial de la map
