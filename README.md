@@ -12,5 +12,5 @@ C'est aussi un portage de mon sokoban fait avec la [Fantasy console](https://fr.
 - [ ] Score en ligne
 - [ ] Création du site en ligne
 - [ ] Utilisation d'api
-- [ ] Portage du jeu
+- [x] Portage du jeu
 - [x] Création des fonction primordial de la map

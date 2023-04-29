@@ -13,10 +13,8 @@ p={ --player
 }
 
 
-
-
 lvl_now = 1 --current level
-lvl_max = 8 -- how many level the game have
+lvl_max = 2 -- how many level the game have
 
 moves = 0 --how many move to finish the level
 
@@ -98,7 +96,6 @@ end
 
 local t = 0
 function updateGame()
-    --data()
     vx,vy = 0,0
     p.mx,p.my = p.x-margex,p.y-margey
     -- if the level is not finsih 
@@ -111,8 +108,8 @@ function updateGame()
             end
             --load data of the level
             data()
+            restart()
             loaded = true
-            --if spawn ~= {} then p.x,p.y = spawn.x,spawn.y end
         end
         --detection if box is in a goals
 		for i,v in ipairs(goal) do
@@ -130,6 +127,7 @@ function updateGame()
 			--print info level & finsih message
 			gprint("level "..lvl_now.."\n\nFinished in : \n"..moves.." moves",80,50,12)
 			gprint("Congratulation\nYou have finished the game !!!",60,80,12)
+            
 		else
 			t=t+1
 			--print info level
@@ -166,12 +164,12 @@ function debug()
 end
 
 function drawGame()
-    drawMap()
-    love.graphics.draw(Tileset, Quads[2], p.x, p.y,0,2)
+    drawMap()--print the map
+    love.graphics.draw(Tileset, Quads[2], p.x, p.y,0,2)--print the player
     --love.graphics.draw(Tileset, Quads[1], 20,20,0,4)
-    debug()
-    love.graphics.rectangle("line",128,128,30*16,17*16)
-    gprint("Game Map",96,96)
+    --debug()
+    love.graphics.rectangle("line",128,128,30*16,17*16)--print the map limit
+    gprint("Game Map",96,96) --some text
 
 
 

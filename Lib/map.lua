@@ -19,11 +19,14 @@ function drawMap()
     for i=1,(map.layers[1].width*map.layers[1].height) do
         
         if(map.layers[1].data[i] ~= 0) then
+			--draw the tiles
             love.graphics.draw(Tileset, Quads[map.layers[1].data[i]], x*8*2, y*8*2,0,2)
+			--if you want to draw the numer of the tiles:
+
             --dat = tostring(map.layers[1].data[i])
             --love.graphics.print(dat, x*8*2, y*8*2)
         end
-        if(i%30 == 0) then
+        if(i%30 == 0) then--'jump' the print
             y=y+1
             x = 7
         end
@@ -31,36 +34,23 @@ function drawMap()
     end
 end
 
-function mapSet(x,y,s)
-    --x,y = x+(8*8),y+(8*8)
+function mapSet(x,y,s)--change the tiles location (x,y) to another (s)
+
 	x = math.floor(x/16)
     y = math.floor(y/map.layers[1].height)
     
     map.layers[1].data[((y-1) * map.layers[1].width + x)+1] = s
 
-    --map.layers[1].data[x+((y-1)*30)] = s
 end
 
-function mapGet(x,y)
+function mapGet(x,y)--return the tiles code of a localition (x,y)
     x = math.floor(x/16)
     y = math.floor(y/map.layers[1].height)
     
     return(map.layers[1].data[((y-1) * map.layers[1].width + x)+1])
 end
 
-
-function test(x,y)
-
-    --x = math.floor(x/map.layers[1].width*2)
-    x = math.floor(x/16)
-    y = math.floor(y/map.layers[1].height)
-    
-    --return(x+((y-1)*map.layers[1].width))
-    return ((y-1) * map.layers[1].width + x) +1
-
-end
-
-function data()
+function data()--load all the data of a map
 	minx,miny = 128,96
 	maxx,maxy = 30*16,17*16
 	for x=minx,maxx,16 do
@@ -105,7 +95,7 @@ function detect(x,y)
 	end
 end
 
-function restart()
+function restart()--reset the map to the initial state
 	--reset var
 	nbobj=backup_nbobj+nbal
 	moves = 0
