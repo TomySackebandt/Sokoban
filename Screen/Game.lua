@@ -36,6 +36,7 @@ box = {} --box cord
 margex,margey = 128,96
 
 function love.keypressed( key, scancode, isrepeat )--player move
+    
     if(key == "right") and col(p.mx,p.my,2,0) then
         p.x = p.x+16
     elseif(key == "left") and col(p.mx,p.my,4,0)then
@@ -51,17 +52,17 @@ function love.keypressed( key, scancode, isrepeat )--player move
         --add function
         restart()
     end
-
-
+    
 end
 
 function solid(x,y)
-    return solids[mapGet(x,y)]
+    local result = mapGet(x,y)
+    return solids[result]
 end
 
 function col(x,y,sens,c)
     --sens = orientation = north:1, east:2, south:3, west:4
-    
+    vx,vy = 0,0
     if sens == 1 then
         vx = 0
         vy = -16
@@ -76,26 +77,29 @@ function col(x,y,sens,c)
         vy = 0
     end
     -- if cor for player and push a box
-    if mapGet(floor((x+vx)),(floor(y+vy)))==3 and c==0 or mapGet(floor((x+vx)),(floor(y+vy)))==4 and c==0 then
+    if ( mapGet((x+vx),(y+vy))==3 and c==0 ) or ( mapGet((x+vx),(y+vy))==4 and c==0 ) then
         if col(x+vx,y+vy,sens,1) then -- call colision of box
             mapSet((x+vx),(y+vy),1)--erased last pos
-            mapSet((x+vx*2),(y+vy*2),3)--write futur pos
+            mapSet((x+(vx*2)),(y+(vy*2)),3)--write futur pos
         end
     end
     
     -- if tile is a solid
-    if solid(x+vx,y+vy) or solid(x+7+vx,y+vy) or solid(x+vx,y+7+vy) or solid(x+7+vx,y+7+vy) then
+    if solid(x+vx,y+vy) then
         return false
     else
         -- moves up to 1
         if c == 0 then moves = moves + 1 end
         return true
     end
+
+    
 end
 
 local t = 0
 function updateGame()
     --data()
+    vx,vy = 0,0
     p.mx,p.my = p.x-margex,p.y-margey
     -- if the level is not finsih 
 	if not have_win then
@@ -144,8 +148,8 @@ function updateGame()
 end
 
 function debug()
-    gprint("X:"..p.x,10,10)
-    gprint("Y:"..p.y,10,30)
+    gprint("X:"..p.mx,10,10)
+    gprint("Y:"..p.my,10,30)
     
     if(p.x >= 128 and p.x < 608 and p.y >= 128 and p.y <400) then
         gprint(test(p.mx,p.my),120,60)
@@ -153,7 +157,7 @@ function debug()
             gprint(mapGet(p.x-margex,p.y-margey),120,30)
         end
         if(solid(p.mx,p.my) ~= nil) then
-            gprint("solid(p.mx,p.my)",128,18)
+            gprint("solid",128,18)
         end
         
     end
@@ -168,6 +172,9 @@ function drawGame()
     debug()
     love.graphics.rectangle("line",128,128,30*16,17*16)
     gprint("Game Map",96,96)
+
+
+
 end
 
 

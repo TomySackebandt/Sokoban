@@ -70,7 +70,7 @@ function data()
 				tmp = {X=x,Y=y}
 				table.insert(goal,tmp)
 				--if box is valid
-				if mapGet(x,y) == 4 then nbal = nbal + 1 end		
+				if mapGet(x,y) == 5 then nbal = nbal + 1 end		
 			end
 			--if tile is player spawn
 			--the x and y is pixel do i have to make sure it's 16*
@@ -94,12 +94,14 @@ end
 
 --detect changment of a tile cord
 function detect(x,y)
-	if mapGet(x,y) == 3 then
-		nbobj = nbobj - 1
-		mapSet(x,y,4)
-	elseif mapGet(x,y) ~=5 and mapGet(x,y)~=3 and mapGet(x,y)~=4 then
-		mapSet(x,y,5)
-		nbobj = nbobj + 1
+	if(x%16 == 0 and y%16 ==0) then
+		if mapGet(x,y) == 3 then
+			nbobj = nbobj - 1
+			mapSet(x,y,4)
+		elseif mapGet(x,y) ~=5 and mapGet(x,y)~=3 and mapGet(x,y)~=4 then
+			mapSet(x,y,5)
+			nbobj = nbobj + 1
+		end
 	end
 end
 
