@@ -1,5 +1,7 @@
 -- load some code
 
+require "Lib/Gui/gui"
+
 require "Screen/Game"
 require "Screen/Menu"
 require "Screen/Over"
@@ -18,6 +20,7 @@ function love.update()
 end
 
 function love.draw()
+    love.graphics.setColor(1,1,1)
     drawState()
 end
 
