@@ -1,6 +1,6 @@
-require "../Lib/map"
-require "../Lib/utils"
 
+require "../Lib/utils"
+require "../Lib/map"
 
 --player var
 p={ --player
@@ -14,7 +14,9 @@ p={ --player
 
 
 lvl_now = 1 --current level
-lvl_max = 2 -- how many level the game have
+lvl_max = #AllMap() -- how many level the game have
+
+print(lvl_max)
 
 moves = 0 --how many move to finish the level
 
@@ -94,6 +96,7 @@ function col(x,y,sens,c)
     
 end
 
+
 local t = 0
 function updateGame()
     vx,vy = 0,0
@@ -171,6 +174,10 @@ function drawGame()
     love.graphics.rectangle("line",128,128,30*16,17*16)--print the map limit
     gprint("Game Map",96,96) --some text
 
+    gprint("Moves: "..moves,100,10)
+    gprint("Box: "..nbobj,100,30)
+
+    gprint(map.name,320,410)
 
 
 end
