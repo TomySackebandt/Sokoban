@@ -51,3 +51,9 @@ function drawButton()
         love.graphics.print(v.t,v.x+(v.w/4),v.y+(v.h/3))
     end
 end
+
+function buttonReset()
+    for i=1,#Tablebutton do
+        table.remove(Tablebutton)
+    end
+end

@@ -35,8 +35,6 @@ box = {} --box cord
 
 margex,margey = 128,96
 
-hide = false
-
 map = Map(1)
 
 function love.keypressed( key, scancode, isrepeat )--player move
@@ -139,15 +137,18 @@ function updateGame()
             drawState = drawOver
             
 		else
+            message("level "..lvl_now.."\n\nFinished in : \n"..moves.." moves !")
 			--print info level
-            hide=true
-			wait() -- wait 2s
-            hide = false
 			moves = 0
 			have_win = false
             lvl_now = lvl_now+1 --change level
             map = Map(lvl_now)
 			loaded = false
+
+            
+            updateState = updateLoading
+            drawState = drawLoading
+
 		end
     end
 end
@@ -182,12 +183,6 @@ function drawGame()
     gprint("Box: "..nbobj,100,30)
 
     gprint(map.name,320,410)
-
-
-    if(hide)then
-        love.graphics.rectangle("fill",0,0,720,480)
-        gprint("level "..lvl_now.."\n\nFinished in : \n"..moves.." moves !",90,50,12)
-    end
 end
 
 
