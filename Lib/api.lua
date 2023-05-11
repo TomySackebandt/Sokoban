@@ -15,9 +15,7 @@ end
 function Map(id)
 
     local url = "http://127.0.0.1:8000/api/Level/"..tostring(id)
-
-    print(url)
-
+    
     if(id ~= nil) then
         level = http.request(url)
 

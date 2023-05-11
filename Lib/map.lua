@@ -20,9 +20,6 @@ for i=0,56,8 do
     table.insert(Quads,love.graphics.newQuad(i,0,8,8,56,8))
 end
 
-
-print(Quads[tonumber(map.map[1])], map.map[31])
-
 function drawMap()
 
     local x,y=8,8
