@@ -2,6 +2,8 @@
 require "../Lib/utils"
 require "../Lib/map"
 
+player_sprite = love.graphics.newImage('player.png')
+
 --player var
 p={ --player
     x=16,
@@ -173,7 +175,7 @@ end
 
 function drawGame()
     drawMap()--print the map
-    love.graphics.draw(Tileset, Quads[2], p.x, p.y,0,2)--print the player
+    love.graphics.draw(player_sprite, p.x, p.y)--print the player
     --love.graphics.draw(Tileset, Quads[1], 20,20,0,4)
     --debug()
     love.graphics.rectangle("line",128,128,30*16,17*16)--print the map limit
