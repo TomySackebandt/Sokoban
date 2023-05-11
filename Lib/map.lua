@@ -5,7 +5,7 @@ if(lvl_now == nil) then
 	lvl_now = 1
 end
 
-map = Map(lvl_now)
+
 
 Tileset = love.graphics.newImage('Tileset.png')
 
@@ -126,4 +126,8 @@ function restart()--reset the map to the initial state
 	for i=1,#box do
 		mapSet(box[i].X,box[i].Y,3)
 	end
+end
+
+function restart_lvl()
+	data()
 end

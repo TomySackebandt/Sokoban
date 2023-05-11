@@ -35,6 +35,10 @@ box = {} --box cord
 
 margex,margey = 128,96
 
+hide = false
+
+map = Map(1)
+
 function love.keypressed( key, scancode, isrepeat )--player move
     
     if(key == "right") and col(p.mx,p.my,2,0) then
@@ -97,8 +101,8 @@ function col(x,y,sens,c)
 end
 
 
-local t = 0
 function updateGame()
+    
     vx,vy = 0,0
     p.mx,p.my = p.x-margex,p.y-margey
     -- if the level is not finsih 
@@ -108,6 +112,9 @@ function updateGame()
             nbal= 0
             for i=0,#goal do
                 table.remove(goal)
+            end
+            for i=0,#box do
+                table.remove(box)
             end
             --load data of the level
             data()
@@ -128,21 +135,18 @@ function updateGame()
 		if lvl_now >= lvl_max and moves~=0 then -- if finish game
             
 			--print info level & finsih message
-			gprint("level "..lvl_now.."\n\nFinished in : \n"..moves.." moves",80,50,12)
-			gprint("Congratulation\nYou have finished the game !!!",60,80,12)
-            
-		else
-			t=t+1
-			--print info level
             updateState = updateOver
             drawState = drawOver
-			gprint("level "..lvl_now.."\n\nFinished in : \n"..moves.." moves !",90,50,12)
-			if t<2*60 then return end -- wait 2s
+            
+		else
+			--print info level
+            hide=true
+			wait() -- wait 2s
+            hide = false
 			moves = 0
-			lvl_now = lvl_now+1 --change level
-			--reset timer & some var
-			t = 0
 			have_win = false
+            lvl_now = lvl_now+1 --change level
+            map = Map(lvl_now)
 			loaded = false
 		end
     end
@@ -180,6 +184,10 @@ function drawGame()
     gprint(map.name,320,410)
 
 
+    if(hide)then
+        love.graphics.rectangle("fill",0,0,720,480)
+        gprint("level "..lvl_now.."\n\nFinished in : \n"..moves.." moves !",90,50,12)
+    end
 end
 
 
