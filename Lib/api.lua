@@ -1,6 +1,7 @@
 local http = require("socket.http")
 
-json = require "lib/json"
+json = require "Lib/json"
+
 
 function AllMap()
 
@@ -13,9 +14,17 @@ end
 
 function Map(id)
 
-    level = http.request("http://127.0.0.1:8000/api/Level/"..id)
+    local url = "http://127.0.0.1:8000/api/Level/"..tostring(id)
 
-    levels=json.decode(level)
-    
-    return levels
+    print(url)
+
+    if(id ~= nil) then
+        level = http.request(url)
+
+        levels=json.decode(level)
+        
+        return levels
+    else
+        return "error"
+    end
 end

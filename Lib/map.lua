@@ -1,5 +1,12 @@
 --json = require "Lib/json"
-map = require "map/map"
+require "Lib/api"
+
+if(lvl_now == nil) then
+	lvl_now = 1
+end
+
+map = Map(lvl_now)
+
 Tileset = love.graphics.newImage('Tileset.png')
 
 Quads = {}
@@ -13,17 +20,20 @@ for i=0,56,8 do
     table.insert(Quads,love.graphics.newQuad(i,0,8,8,56,8))
 end
 
+
+print(Quads[tonumber(map.map[1])], map.map[31])
+
 function drawMap()
 
     local x,y=8,8
-    for i=1,(map.layers[1].width*map.layers[1].height) do
+    for i=1,(map.width*map.height) do
         
-        if(map.layers[1].data[i] ~= 0) then
+        if(map.map[i] ~= 0) then
 			--draw the tiles
-            love.graphics.draw(Tileset, Quads[map.layers[1].data[i]], x*8*2, y*8*2,0,2)
+            love.graphics.draw(Tileset, Quads[tonumber(map.map[i])], x*8*2, y*8*2,0,2)
 			--if you want to draw the numer of the tiles:
 
-            --dat = tostring(map.layers[1].data[i])
+            --dat = tostring(map.map[i])
             --love.graphics.print(dat, x*8*2, y*8*2)
         end
         if(i%30 == 0) then--'jump' the print
@@ -37,17 +47,17 @@ end
 function mapSet(x,y,s)--change the tiles location (x,y) to another (s)
 
 	x = math.floor(x/16)
-    y = math.floor(y/map.layers[1].height)
+    y = math.floor(y/map.height)
     
-    map.layers[1].data[((y-1) * map.layers[1].width + x)+1] = s
-
+    map.map[((y-1) * map.width + x)+1] = s
+	s = tonumber(s)
 end
 
 function mapGet(x,y)--return the tiles code of a localition (x,y)
     x = math.floor(x/16)
-    y = math.floor(y/map.layers[1].height)
+    y = math.floor(y/map.height)
     
-    return(map.layers[1].data[((y-1) * map.layers[1].width + x)+1])
+    return(tonumber(map.map[((y-1) * map.width + x)+1]))
 end
 
 function data()--load all the data of a map
