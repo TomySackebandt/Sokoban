@@ -11,8 +11,14 @@ Le jeu a besoin d'une connexion internet car il utilise une api
 
 Pour jouer au jeu, il faut d'abord installer ou télécharger Love2d.
 Pour ça rendez-vous sur leur site officiel et télécharger la version qui vous correspond.
-Ensuite télécharger les fichiers de git en tant que zip et renommer l'extension en LOVE
-> Par exemple: sokoban.zip devien sokoban.LOVE
+Ensuite télécharger les fichiers du github.
+
+Pour lancer le projet, il y a deux options :
+    - Ouvrir le dossier du projet dans l'explorateur de fichiers et faire glisser le dossier sur l'icône de Love2D
+    - Ouvrir Love2D et cliquer sur "File" puis "Open" pour sélectionner le dossier du projet
+
+Le projet devrait se lancer et s'afficher à l'écran
+
 
 ### Windows
 Il sufit ensuite de gliser le fichier LOVE sur l'executable love.exe.
