@@ -14,8 +14,8 @@ Pour ça rendez-vous sur leur site officiel et télécharger la version qui vous
 Ensuite télécharger les fichiers du github.
 
 Pour lancer le projet, il y a deux options :
-    - Ouvrir le dossier du projet dans l'explorateur de fichiers et faire glisser le dossier sur l'icône de Love2D
-    - Ouvrir Love2D et cliquer sur "File" puis "Open" pour sélectionner le dossier du projet
+- Ouvrir le dossier du projet dans l'explorateur de fichiers et faire glisser le dossier sur l'icône de Love2D
+- Ouvrir Love2D et cliquer sur "File" puis "Open" pour sélectionner le dossier du projet
 
 Le projet devrait se lancer et s'afficher à l'écran
 
