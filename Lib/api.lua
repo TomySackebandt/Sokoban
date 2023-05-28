@@ -2,7 +2,7 @@ local http = require("socket.http")
 
 json = require "Lib/json"
 
-url = "http://127.0.0.1:8000/api/"
+url = "http://reden.alwaysdata.net//api/"
 
 function AllMap()
 
