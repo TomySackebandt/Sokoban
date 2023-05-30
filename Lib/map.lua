@@ -20,14 +20,26 @@ for i=0,56,8 do
     table.insert(Quads,love.graphics.newQuad(i,0,8,8,56,8))
 end
 
+function hex2rgb(hex)
+    hex = hex:gsub("#","")
+    return tonumber("0x"..hex:sub(1,2)), tonumber("0x"..hex:sub(3,4)), tonumber("0x"..hex:sub(5,6))
+end
+
 function drawMap()
+	color = {}
+	color.r,color.g,color.b = hex2rgb("#5D275D")
+	love.graphics.setColor(color.r,color.g,color.b)
+    love.graphics.rectangle("fill",8*16,8*16,30*16,17*16)
+    love.graphics.setColor(1,1,1)
 
     local x,y=8,8
     for i=1,(map.width*map.height) do
         
         if(map.map[i] ~= 0) then
 			--draw the tiles
-            love.graphics.draw(Tileset, Quads[tonumber(map.map[i])], x*8*2, y*8*2,0,2)
+			if(tonumber(map.map[i]) ~= 1) then
+            	love.graphics.draw(Tileset, Quads[tonumber(map.map[i])], x*8*2, y*8*2,0,2)
+			end
 			--if you want to draw the numer of the tiles:
 
             --dat = tostring(map.map[i])

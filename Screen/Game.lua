@@ -174,6 +174,7 @@ function debug()
 end
 
 function drawGame()
+
     drawMap()--print the map
     love.graphics.draw(player_sprite, p.x, p.y)--print the player
     --love.graphics.draw(Tileset, Quads[1], 20,20,0,4)
